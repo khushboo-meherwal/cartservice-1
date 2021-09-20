@@ -17,6 +17,13 @@ stages:
   - job: Build
     displayName: Build and push Docker image
     steps:
+
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: test
+        projects: '**/*Tests/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+           
     - task: Docker@1
       displayName: 'Build the Docker image'
       inputs:
