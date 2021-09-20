@@ -1,4 +1,5 @@
 name : Docker-CI
+
 trigger:
   branches:
     include:
@@ -17,12 +18,9 @@ stages:
   - job: Build
     displayName: Build and push Docker image
     steps:
+  
+    - task: SonarQubeAnalyze@4
 
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: test
-        projects: '**/*Tests/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
            
     - task: Docker@1
       displayName: 'Build the Docker image'
